@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       home: BlocProvider(
         create: (context) =>
             HaberdasherBloc(haberdasherRepository: haberdasherRepository),
-        child: MyHomePage(),
+        child: MakeHatPage(),
       ),
     );
   }

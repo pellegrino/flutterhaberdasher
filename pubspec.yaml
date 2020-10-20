@@ -27,7 +27,7 @@ dependencies:
   protobuf: any
   bloc: ^6.0.3
   flutter_bloc: ^6.0.6
-  equatable: ^1.0.2
+  equatable: ^1.2.0
   twirp_dart_core:
     git:
       url: git://github.com/apptreesoftware/twirp_dart_core

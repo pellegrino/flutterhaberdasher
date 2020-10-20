@@ -18,20 +18,17 @@ class Size {
 
   pb.Size toProto() {
     var pbSize = pb.Size();
-    pbSize.inches = inches;
+    pbSize.inches = this.inches;
 
     return pbSize;
   }
 
-  factory Size.fromProto(pb.Size pbSize) {
+  factory Size.fromProtobufBytes(List<int> byteValues) {
+    var pbSize = pb.Size.fromBuffer(byteValues);
+
     return new Size(
       pbSize.inches,
     );
-  }
-
-  factory Size.fromProtobufBytes(List<int> byteValues) {
-    var pbSize = pb.Size.fromBuffer(byteValues);
-    return Size.fromProto(pbSize);
   }
 
   factory Size.fromJson(Map<String, dynamic> json) {
@@ -65,24 +62,21 @@ class Hat {
 
   pb.Hat toProto() {
     var pbHat = pb.Hat();
-    pbHat.inches = inches;
-    pbHat.color = color;
-    pbHat.name = name;
+    pbHat.inches = this.inches;
+    pbHat.color = this.color;
+    pbHat.name = this.name;
 
     return pbHat;
   }
 
-  factory Hat.fromProto(pb.Hat pbHat) {
+  factory Hat.fromProtobufBytes(List<int> byteValues) {
+    var pbHat = pb.Hat.fromBuffer(byteValues);
+
     return new Hat(
       pbHat.inches,
       pbHat.color,
       pbHat.name,
     );
-  }
-
-  factory Hat.fromProtobufBytes(List<int> byteValues) {
-    var pbHat = pb.Hat.fromBuffer(byteValues);
-    return Hat.fromProto(pbHat);
   }
 
   factory Hat.fromJson(Map<String, dynamic> json) {
