@@ -25,6 +25,9 @@ dependencies:
     sdk: flutter
   http: ^0.12.0
   protobuf: any
+  equatable: any
+  bloc: any
+  flutter_bloc: any
   twirp_dart_core:
     git:
       url: git://github.com/apptreesoftware/twirp_dart_core
@@ -36,6 +39,7 @@ dependencies:
 dev_dependencies:
   test: any
   mockito: any
+  bloc_test: any
   flutter_test:
     sdk: flutter
 
