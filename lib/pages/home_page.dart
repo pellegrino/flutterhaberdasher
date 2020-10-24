@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterhaberdasher/bloc/haberdasher_bloc.dart';
 import 'package:flutterhaberdasher/model/model.dart';
+import 'package:flutterhaberdasher/pages/pages.dart';
 import 'package:flutterhaberdasher/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,7 +42,10 @@ class HomePage extends StatelessWidget {
                   message: "What is the size of the hat (in inches)?",
                 );
               } else if (state is HatLoaded) {
-                return Text("hat is ${state.hat}");
+                return Text(
+                  "Made hat ${state.hat}",
+                  key: HaberdasherUIKeys.hatLoadedKey,
+                );
               }
             }),
             HatControls(),
