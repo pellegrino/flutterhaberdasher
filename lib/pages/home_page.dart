@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterhaberdasher/bloc/haberdasher_bloc.dart';
+import 'package:flutterhaberdasher/model/model.dart';
 import 'package:flutterhaberdasher/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
+  final Haberdasher haberdasherClient;
+
+  const HomePage({
+    Key key,
+    @required this.haberdasherClient,
+  })  : assert(haberdasherClient != null),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +26,9 @@ class HomePage extends StatelessWidget {
 
   BlocProvider<HaberdasherBloc> _buildBody(BuildContext context) {
     return BlocProvider(
-      create: (_) => HaberdasherBloc(),
+      create: (_) => HaberdasherBloc(
+        client: this.haberdasherClient,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -26,9 +36,13 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 10),
             BlocBuilder<HaberdasherBloc, HaberdasherState>(
                 builder: (context, state) {
-              return MessageDisplay(
-                message: "What is the size of the hat (in inches)?",
-              );
+              if (state is HatInitial) {
+                return MessageDisplay(
+                  message: "What is the size of the hat (in inches)?",
+                );
+              } else if (state is HatLoaded) {
+                return Text("hat is ${state.hat}");
+              }
             }),
             HatControls(),
             SizedBox(height: 20)

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterhaberdasher/bloc/haberdasher_bloc.dart';
+import 'package:flutterhaberdasher/model/model.dart';
 
 class HatControls extends StatefulWidget {
   const HatControls({
@@ -22,9 +25,17 @@ class _HatControlsState extends State<HatControls> {
               border: OutlineInputBorder(),
               hintText: "What is the size of your hat? (in inches)"),
           onChanged: (value) => inputStr = value,
-          onSubmitted: (_) => print("submit"),
+          onSubmitted: (_) => dispatchMakeHat(),
         )
       ],
     );
+  }
+
+  void dispatchMakeHat() {
+    Size size = Size(int.parse(inputStr));
+    controller.clear();
+    BlocProvider.of<HaberdasherBloc>(context).add(MakeHatStarted(
+      size: size,
+    ));
   }
 }

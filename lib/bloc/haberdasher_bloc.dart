@@ -25,7 +25,6 @@ class HaberdasherBloc extends Bloc<HaberdasherEvent, HaberdasherState> {
   ) async* {
     if (event is MakeHatStarted) {
       var hat = await client.makeHat(event.size);
-      print(hat);
       yield HatLoaded(hat: hat);
     }
   }
