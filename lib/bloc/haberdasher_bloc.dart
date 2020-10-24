@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterhaberdasher/model/model.dart';
 import 'package:flutterhaberdasher/model/rpc/haberdasher/service.twirp.dart';
+import 'package:twirp_dart_core/twirp_dart_core.dart';
 
 part 'haberdasher_event.dart';
 part 'haberdasher_state.dart';
@@ -24,8 +25,12 @@ class HaberdasherBloc extends Bloc<HaberdasherEvent, HaberdasherState> {
     HaberdasherEvent event,
   ) async* {
     if (event is MakeHatStarted) {
-      var hat = await client.makeHat(event.size);
-      yield HatLoaded(hat: hat);
+      try {
+        var hat = await client.makeHat(event.size);
+        yield HatLoaded(hat: hat);
+      } on TwirpException catch (e) {
+        yield HatError(message: e.message);
+      }
     }
   }
 }

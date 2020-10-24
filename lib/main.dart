@@ -12,15 +12,15 @@ void main() {
     "https://8mrhov2n0m.execute-api.us-west-2.amazonaws.com",
   );
 
-  runApp(MyApp(
+  runApp(HaberdasherApp(
     haberdasherClient: haberdasherClient,
   ));
 }
 
-class MyApp extends StatelessWidget {
+class HaberdasherApp extends StatelessWidget {
   final Haberdasher haberdasherClient;
 
-  const MyApp({
+  const HaberdasherApp({
     Key key,
     @required this.haberdasherClient,
   })  : assert(haberdasherClient != null),

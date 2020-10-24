@@ -46,6 +46,11 @@ class HomePage extends StatelessWidget {
                   "Made hat ${state.hat}",
                   key: HaberdasherUIKeys.hatLoadedKey,
                 );
+              } else if (state is HatError) {
+                return Text(
+                  state.message,
+                  key: HaberdasherUIKeys.hatErrorKey,
+                );
               }
             }),
             HatControls(),

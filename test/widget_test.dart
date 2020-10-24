@@ -15,19 +15,17 @@ import 'package:flutterhaberdasher/pages/pages.dart';
 import 'package:flutterhaberdasher/widgets/message_display.dart';
 import 'package:flutterhaberdasher/widgets/widgets.dart';
 import 'package:mockito/mockito.dart';
+import 'package:twirp_dart_core/twirp_dart_core.dart';
 
 class MockHaberdasherClient extends Mock implements Haberdasher {}
 
 void main() {
   MockHaberdasherClient mockHaberdasherClient = MockHaberdasherClient();
-
-  setUp(() {
+  testWidgets('Creates a hat and displays it', (WidgetTester tester) async {
     when(mockHaberdasherClient.makeHat(any))
         .thenAnswer((_) async => Hat(1, 'red', 'bowler'));
-  });
-  testWidgets('Creates a hat and displays it', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(
+    await tester.pumpWidget(HaberdasherApp(
       haberdasherClient: mockHaberdasherClient,
     ));
 
@@ -38,5 +36,21 @@ void main() {
     verify(mockHaberdasherClient.makeHat(any)).called(1);
 
     expect(find.byKey(HaberdasherUIKeys.hatLoadedKey), findsOneWidget);
+  });
+
+  testWidgets('Displays an error when it cannot create the hat',
+      (WidgetTester tester) async {
+    when(mockHaberdasherClient.makeHat(any))
+        .thenThrow(TwirpException('wrong size'));
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(HaberdasherApp(
+      haberdasherClient: mockHaberdasherClient,
+    ));
+
+    await tester.enterText(find.byType(TextField), '0');
+    await tester.testTextInput.receiveAction(TextInputAction.done);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(HaberdasherUIKeys.hatErrorKey), findsOneWidget);
   });
 }
