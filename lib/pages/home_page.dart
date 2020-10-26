@@ -52,6 +52,8 @@ class HomePage extends StatelessWidget {
                   key: HaberdasherUIKeys.hatErrorKey,
                 );
               }
+
+              return Text("Unexpected state");
             }),
             HatControls(),
             SizedBox(height: 20)

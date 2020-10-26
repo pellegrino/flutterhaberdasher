@@ -17,6 +17,11 @@ void main() {
       client: mockHaberdasherClient,
     );
   });
+
+  tearDown(() {
+    bloc.close();
+  });
+
   test("initial state is empty", () {
     expect(bloc.initialState, equals(HatInitial()));
   });

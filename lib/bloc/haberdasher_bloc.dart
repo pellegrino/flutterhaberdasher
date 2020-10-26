@@ -13,11 +13,10 @@ part 'haberdasher_state.dart';
 class HaberdasherBloc extends Bloc<HaberdasherEvent, HaberdasherState> {
   final Haberdasher client;
   HaberdasherBloc({
-    @required Haberdasher this.client,
+    @required this.client,
   })  : assert(client != null),
         super(HatInitial());
 
-  @override
   HaberdasherState get initialState => HatInitial();
 
   @override

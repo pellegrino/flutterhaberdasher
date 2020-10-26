@@ -12,8 +12,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutterhaberdasher/main.dart';
 import 'package:flutterhaberdasher/model/model.dart';
 import 'package:flutterhaberdasher/pages/pages.dart';
-import 'package:flutterhaberdasher/widgets/message_display.dart';
-import 'package:flutterhaberdasher/widgets/widgets.dart';
 import 'package:mockito/mockito.dart';
 import 'package:twirp_dart_core/twirp_dart_core.dart';
 
